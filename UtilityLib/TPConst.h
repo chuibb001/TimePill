@@ -14,6 +14,8 @@
 
 // Key
 #define kTPThemeKey @"kTPThemeKey"
+#define kTPUpgradeKey @"kTPUpgradeKey"
+#define kTPFirstShowExtendedBarKey @"kTPFirstShowExtendedBarKey"
 
 @interface TPConst : NSObject
 

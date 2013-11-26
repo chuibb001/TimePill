@@ -24,8 +24,9 @@
 #import "ExpandingButtonBar.h"
 #import "TPCreateDiaryViewController.h"
 #import "TPLongWeiboManager.h"
+#import "UIImageView+WebCache.h"
 
-@interface TPTimelineViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface TPTimelineViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ExpandingButtonBarDelegate>
 {
     NSIndexPath *lastAddViewIndexPath;
     NSIndexPath *currentAddViewIndexPath;

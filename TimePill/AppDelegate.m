@@ -27,9 +27,14 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     
-    // 新特性页面
-    TPNewFeatherViewController *new = [[TPNewFeatherViewController alloc] init];
-    //[new show];
+    BOOL first = [[NSUserDefaults standardUserDefaults] boolForKey:kTPUpgradeKey];
+    if (!first) {
+        // new feather
+        TPNewFeatherViewController *new = [[TPNewFeatherViewController alloc] init];
+        [new show];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kTPUpgradeKey];
+    }
+    
     return YES;
 }
 

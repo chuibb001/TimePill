@@ -397,8 +397,6 @@
     scrollView.showsHorizontalScrollIndicator = NO;
     //self.emotionScrollView.delegate=self;
     NSArray *imageArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"darkBlueTheme.png"],[UIImage imageNamed:@"darkGreenTheme.png"],[UIImage imageNamed:@"darkGrayTheme.png"],[UIImage imageNamed:@"darkYellowTheme.png"], nil];
-    NSArray *textArray = [NSArray arrayWithObjects:[NSString stringWithFormat:@"蓝色"],[NSString stringWithFormat:@"黄色"],[NSString stringWithFormat:@"灰色"],[NSString stringWithFormat:@"黄色"], nil];
-    
     for(int i = 0;i<3;i++)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

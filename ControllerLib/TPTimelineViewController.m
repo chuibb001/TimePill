@@ -277,7 +277,7 @@
         userInfoModel.profileImageURL = [responseDic objectForKey:@"profile_image_url"];
         
         if(!userInfoModel.isPersonallySet)
-            [[TPImageDownloadCenter sharedInstance] loadImageWithURL:userInfoModel.profileImageURL Type:TPWeiboImageTypeHead ViewDelegate:self.headView ModelDelegate:userInfoModel ProgressDelegate:nil];
+        [self.headView.headImageView setImageWithURL:[NSURL URLWithString:userInfoModel.profileImageURL]];
     }
     
 }
@@ -395,15 +395,7 @@
     [SVProgressHUD showSuccessWithStatus:@"成功保存到相册!"];
     
     [[TPLongWeiboManager sharedInstance] saveLongWeibo:self.longWeiboImage completionHandler:^(BOOL success){}];
-    
-//    [[TPLongWeiboManager sharedInstance] readAllThumbnailImagesWithCompletionHandler:^(NSMutableArray *array){
-//    
-//    }];
-    
-//    [[TPLongWeiboManager sharedInstance] readOriginalImageWithID:7 completionHandler:^(UIImage *image){
-//        
-//    }];
-    //[[TPLongWeiboManager sharedInstance] removeLongWeiboWithID:7];
+
 }
 - (void)shareToWeibo
 {
@@ -499,6 +491,53 @@
     
     [self dismissModalViewControllerAnimated:YES];
 }
+
+#pragma mark ExpandingButtonBarDelegate
+- (void)expandingBarWillAppear:(ExpandingButtonBar *)bar
+{
+    BOOL first = [[NSUserDefaults standardUserDefaults] boolForKey:kTPFirstShowExtendedBarKey];
+    if (!first) {
+        UIView *view = [[UIView alloc] initWithFrame:self.view.frame];
+        view.backgroundColor = [UIColor blackColor];
+        view.alpha = 0.0;
+        [self.view addSubview:view];
+        NSArray *texts = @[@"保存到相册",@"分享到微博",@"清空"];
+        for (int i = 0; i < 3; i++) {
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(3 + i * 80, self.menuButtonBar.frame.origin.y - 110, 70.0, 20.0)];
+            label.text = texts[i];
+            label.font = [UIFont fontWithName:@"ShiShangZhongHeiJianTi" size:14.0];
+            label.textColor = [UIColor whiteColor];
+            label.textAlignment = UITextAlignmentCenter;
+            [view addSubview:label];
+            if (i == 2) {
+                label.center = CGPointMake(label.center.x - 10, label.center.y);
+            }
+        }
+        [view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissGuideView:)]];
+        [UIView animateWithDuration:0.2f animations:^{
+            view.alpha = 0.65;
+        } completion:^(BOOL finished){
+            view.alpha = 0.65;
+        }];
+    }
+}
+
+- (void)dismissGuideView:(UITapGestureRecognizer *)tap
+{
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kTPFirstShowExtendedBarKey];
+    UIView *view = tap.view;
+    [UIView animateWithDuration:0.2f animations:^{
+        view.alpha = 0.0;
+    } completion:^(BOOL finished){
+        [view removeFromSuperview];
+    }];
+}
+
+- (void)expandingBarDidAppear:(ExpandingButtonBar *)bar
+{
+    
+}
+
 #pragma mark Theme
 -(void)changeTheme
 {
@@ -551,12 +590,12 @@
     }
 }
 
-
 #pragma mark init
 -(void)initBackground
 {
     self.view.backgroundColor = [UIColor colorWithPatternImage:[TPTheme currentBackgroundImage]];
 }
+
 -(void)initData
 {
     self.listData = [[TPUtil sharedInstance] TimelineList];
@@ -567,6 +606,7 @@
     shouldUpdateCell = YES;
     shouldHideAddButton = NO;
 }
+
 -(void)initHeadView
 {
     self.headView = [[TPTimelineHeaderView alloc] initWithFrame:CGRectMake(0, 0, 320,153.5)];
@@ -575,6 +615,7 @@
     if(userInfoModel.profileImage)
         self.headView.headImageView.image = userInfoModel.profileImage;
 }
+
 -(void)initTableView
 {
     self.timelineTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -586,6 +627,7 @@
     [self.timelineTableView setTableHeaderView:self.headView];
     [self.view addSubview:self.timelineTableView];
 }
+
 -(void)initNavigation
 {
     //导航bar
@@ -667,16 +709,13 @@
     [self.menuButtonBar setDelay:0.00];
     [self.menuButtonBar setExplode:YES];
     [self.menuButtonBar setSpin:YES];
+    self.menuButtonBar.delegate = self;
 }
+
 -(void)initDefaultImageView
 {
     self.defaultImageView = [[UIImageView alloc] initWithFrame:CGRectMake(-10, CGRectGetHeight(self.view.frame) / 2 - 110, 320,320)];
     self.defaultImageView.image = [UIImage imageNamed:@"timelineDefault.png"];
-}
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
