@@ -17,7 +17,7 @@
 
 -(void)loadImageWithURL:(NSString *)urlString Type:(TPWeiboImageType)type ViewDelegate:(id<TPAbstractViewDelegate>)viewDelegate ModelDelegate:(id<TPAbstractModelDelegate>) modelDelegate ProgressDelegate:(id<TPAbstractProgressDelegate>) progressDelegate;
 
-// 当DataModel被销毁时要取消,否则delegate是野指针,有需要可以写一个CancelRequestWithType:
+// 当DataModel被销毁时要取消,否则delegate是野指针,有需要可以写一个CancelRequestWithType://
 -(void)CancelAllRequests;  
 
 @end
