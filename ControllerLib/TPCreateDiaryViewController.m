@@ -186,7 +186,13 @@
 -(void)DoneClicked:(id)sender
 {
     if (self.longWeiboImage) {
-        [[TPSinaWeiboEngine sharedInstance] postImageStatusWithText:self.textView.text Latitude:nil Longitude:nil Image:self.longWeiboImage];
+        if ([[TPSinaWeiboEngine sharedInstance] isLogon]) {
+            [[TPSinaWeiboEngine sharedInstance] postImageStatusWithText:self.textView.text Latitude:nil Longitude:nil Image:self.longWeiboImage];
+        } else {
+            TPLoginViewController *login = [[TPLoginViewController alloc] init];
+            [self presentModalViewController:[[TPNavigationViewController alloc] initWithRootViewController:login] animated:YES];
+        }
+        
     }
     else {
         TPDiaryDataModel *dataModel = [[TPDiaryDataModel alloc] init];

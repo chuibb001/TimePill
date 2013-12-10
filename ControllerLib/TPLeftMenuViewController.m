@@ -46,7 +46,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30, 10, 150, 30)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(43, 10, 150, 30)];
         label.backgroundColor = [UIColor clearColor];
         label.textColor = [UIColor colorWithRed:191./255. green:191./255. blue:191./255. alpha:1.0];
         label.font = [UIFont boldSystemFontOfSize:16.0];
@@ -142,7 +142,7 @@
 }
 -(void)initTableView
 {
-    self.menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 150, 250.0)];
+    self.menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 180, 250.0)];
     self.menuTableView.delegate = self;
     self.menuTableView.dataSource = self;
     self.menuTableView.scrollEnabled = NO;
@@ -155,7 +155,7 @@
     headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"slideCellNomalHeader.png"]];
     [self.menuTableView setTableHeaderView:headerView];
     [self.view addSubview:self.menuTableView];
-    self.menuTableView.center = CGPointMake(150 / 2, self.view.frame.size.height / 2);
+    self.menuTableView.center = CGPointMake(180 / 2, self.view.frame.size.height / 2);
 }
 - (void)initInfoView
 {

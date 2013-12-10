@@ -22,6 +22,8 @@
 #import "TPRevealViewController.h"
 #import "TPTheme.h"
 #import "TPSinaWeiboEngine.h"
+#import "TPLoginViewController.h"
+#import "TPNavigationViewController.h"
 
 @interface TPCreateDiaryViewController : UIViewController<TPLocationDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 

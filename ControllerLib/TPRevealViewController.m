@@ -62,7 +62,8 @@ static TPRevealViewController *instance;
     /**
      *  what to do in the finger down state is to change root viewcontroller's frame
      */
-    if(panGesture.state == UIGestureRecognizerStateChanged) {
+    if(panGesture.state == UIGestureRecognizerStateChanged)
+    {
         // record swipe speed
         self.velocity = [self.pan velocityInView:self.view];
         // relative coordinate
@@ -314,7 +315,7 @@ static TPRevealViewController *instance;
 #pragma mark init
 -(void)setupData
 {
-    self.leftOffSet = 150.0;
+    self.leftOffSet = 180.0;
     self.rightOffSet = 230.0;
 
     self.rootViewController.view.frame = CGRectMake(0, 0, 320.0, self.view.bounds.size.height + 0);

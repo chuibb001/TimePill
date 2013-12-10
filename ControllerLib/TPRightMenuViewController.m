@@ -223,13 +223,20 @@
     
     if(indexPath.section == 3)
     {
-        int row = [indexPath row];
-        NSString *userID = ((TPFriendDataModel *)[self.listData objectAtIndex:row]).userID;
         TPRevealViewController *reveal = [TPRevealViewController sharedInstance];
-        TPWeiboListViewController *diary = [[TPWeiboListViewController alloc] init];
-        diary.fromType = TPWeiboListViewControllerFromTypeMenu;
-        diary.userID = userID;
-        [reveal presentModalViewController:[[TPNavigationViewController alloc] initWithRootViewController:diary] animated:YES];
+        if ([[TPSinaWeiboEngine sharedInstance] isLogon]) {
+            int row = [indexPath row];
+            NSString *userID = ((TPFriendDataModel *)[self.listData objectAtIndex:row]).userID;
+            TPRevealViewController *reveal = [TPRevealViewController sharedInstance];
+            TPWeiboListViewController *diary = [[TPWeiboListViewController alloc] init];
+            diary.fromType = TPWeiboListViewControllerFromTypeMenu;
+            diary.userID = userID;
+            [reveal presentModalViewController:[[TPNavigationViewController alloc] initWithRootViewController:diary] animated:YES];
+        }
+        else {
+            TPLoginViewController *login = [[TPLoginViewController alloc] init];
+            [reveal presentModalViewController:[[TPNavigationViewController alloc] initWithRootViewController:login] animated:YES];
+        }
     }
 }
 #pragma mark Button Clicked
@@ -274,36 +281,43 @@
             break;
         case kSectionHeaderButtonBaseTag + 3:   // 小伙伴
         {
-            TPFriendsViewController * f = [[TPFriendsViewController alloc] init];
             TPRevealViewController *reveal = [TPRevealViewController sharedInstance];
-            __weak TPRightMenuViewController *weakSelf = self;
-            f.handler = ^(TPFriendDataModel *dataModel)
-            {
-                if([weakSelf.listData count] == 0)
-                    [weakSelf.listData addObject:dataModel];
-                else 
+            if ([[TPSinaWeiboEngine sharedInstance] isLogon]) {
+                TPFriendsViewController * f = [[TPFriendsViewController alloc] init];
+                __weak TPRightMenuViewController *weakSelf = self;
+                f.handler = ^(TPFriendDataModel *dataModel)
                 {
-                    // 排重
-                    BOOL contains = NO;
-                    for(TPFriendDataModel *model in self.listData)
+                    if([weakSelf.listData count] == 0)
+                        [weakSelf.listData addObject:dataModel];
+                    else
                     {
-                        if([model.userID isEqualToString:dataModel.userID])
-                            contains = YES;
-                    }
-                    if(!contains)
-                    {
-                        [weakSelf.listData insertObject:dataModel atIndex:0];
-                        if([weakSelf.listData count] > 3)
+                        // 排重
+                        BOOL contains = NO;
+                        for(TPFriendDataModel *model in self.listData)
                         {
-                            [weakSelf.listData removeObjectAtIndex:3];
+                            if([model.userID isEqualToString:dataModel.userID])
+                                contains = YES;
                         }
+                        if(!contains)
+                        {
+                            [weakSelf.listData insertObject:dataModel atIndex:0];
+                            if([weakSelf.listData count] > 3)
+                            {
+                                [weakSelf.listData removeObjectAtIndex:3];
+                            }
+                        }
+                        
                     }
                     
-                }
-                
-                [weakSelf.menuTableView reloadData];
-            };
-            [reveal presentModalViewController:[[TPNavigationViewController alloc] initWithRootViewController:f] animated:YES];
+                    [weakSelf.menuTableView reloadData];
+                };
+                [reveal presentModalViewController:[[TPNavigationViewController alloc] initWithRootViewController:f] animated:YES];
+            }
+            else {
+                TPLoginViewController *login = [[TPLoginViewController alloc] init];
+                [reveal presentModalViewController:[[TPNavigationViewController alloc] initWithRootViewController:login] animated:YES];
+            }
+            
         }
         default:
             break;
@@ -397,6 +411,7 @@
     scrollView.showsHorizontalScrollIndicator = NO;
     //self.emotionScrollView.delegate=self;
     NSArray *imageArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"darkBlueTheme.png"],[UIImage imageNamed:@"darkGreenTheme.png"],[UIImage imageNamed:@"darkGrayTheme.png"],[UIImage imageNamed:@"darkYellowTheme.png"], nil];
+    
     for(int i = 0;i<3;i++)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
