@@ -51,7 +51,7 @@ typedef void(^CommentButtonHandler)(void);
 
 @end
 
-@interface TPTimelineTableViewTextWithImageCell : TPTimelineTableViewTextCell<TPAbstractViewDelegate>
+@interface TPTimelineTableViewTextWithImageCell : TPTimelineTableViewTextCell
 
 @property (nonatomic,strong) UIImageView *picImageView;
 
@@ -64,7 +64,7 @@ typedef void(^CommentButtonHandler)(void);
 
 @end
 
-@interface TPTimelineTableViewRepostTextWithImageCell : TPTimelineTableViewRepostTextCell<TPAbstractViewDelegate>
+@interface TPTimelineTableViewRepostTextWithImageCell : TPTimelineTableViewRepostTextCell
 
 @property (nonatomic,strong) UIImageView *picImageView;
 

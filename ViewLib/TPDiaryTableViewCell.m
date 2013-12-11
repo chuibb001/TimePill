@@ -51,8 +51,8 @@
         [self.cardImageView addSubview:self.picImageView];
         // 日记Icon
         self.iconImageView = [[UIImageView alloc] init];
-        self.iconImageView.image = [UIImage imageNamed:@"weiboIcon.png"];
-        //[self addSubview:self.iconImageView];
+        self.iconImageView.image = [UIImage imageNamed:@"pencilIcon.png"];
+        [self addSubview:self.iconImageView];
         // 加号按钮
         self.addButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.addButton setBackgroundImage:[UIImage imageNamed:@"bianji.png"] forState:UIControlStateNormal];

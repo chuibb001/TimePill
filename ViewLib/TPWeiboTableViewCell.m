@@ -232,9 +232,4 @@
     self.commentButton.center = CGPointMake(self.commentButton.center.x, CGRectGetMaxY(cardImageViewFrame));
 }
 
-#pragma mark TPAbstractViewDelegate
--(void)updateViewWithImage:(UIImage *)image
-{
-    self.picImageView.image = image;
-}
 @end

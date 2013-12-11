@@ -29,7 +29,7 @@
 
 @end
 
-@interface TPWeiboTableViewTextWithImageCell : TPWeiboTableViewTextCell<TPAbstractViewDelegate>
+@interface TPWeiboTableViewTextWithImageCell : TPWeiboTableViewTextCell
 
 @property (nonatomic,strong) UIImageView *picImageView;
 
@@ -42,7 +42,7 @@
 
 @end
 
-@interface TPWeiboTableViewRepostTextWithImageCell : TPWeiboTableViewRepostTextCell<TPAbstractViewDelegate>
+@interface TPWeiboTableViewRepostTextWithImageCell : TPWeiboTableViewRepostTextCell
 
 @property (nonatomic,strong) UIImageView *picImageView;
 

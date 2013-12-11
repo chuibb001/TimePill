@@ -285,12 +285,6 @@
     self.commentBackgroundImageView.image = commentBackgroundImage;
 }
 
-#pragma mark TPAbstractViewDelegate
--(void)updateViewWithImage:(UIImage *)image
-{
-    self.picImageView.image = image;
-}
-
 @end
 
 @implementation TPTimelineTableViewRepostTextCell  // 2
@@ -429,12 +423,6 @@
     UIEdgeInsets commentBackgroundImageInsets = UIEdgeInsetsMake(20, 25, 10, 25);
     UIImage *commentBackgroundImage = [[TPTheme currentCommentBackgroundImage] resizableImageWithCapInsets:commentBackgroundImageInsets];
     self.commentBackgroundImageView.image = commentBackgroundImage;
-}
-
-#pragma mark TPAbstractViewDelegate
--(void)updateViewWithImage:(UIImage *)image
-{
-    self.picImageView.image = image;
 }
 
 @end
