@@ -50,6 +50,7 @@
         // 评论按钮
         UIEdgeInsets commenInsets = UIEdgeInsetsMake(6, 22, 6, 22);
         UIImage *commentImage = [[UIImage imageNamed:@"weiboCommentButton.png"] resizableImageWithCapInsets:commenInsets];
+        UIImage *commentImageClicked = [[UIImage imageNamed:@"weiboCommentButtonClicked.png"] resizableImageWithCapInsets:commenInsets];
         self.commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.commentButton.frame = CGRectMake(6, 0, 308, 40);
         [self.commentButton setTitle:@"点击查看评论" forState:UIControlStateNormal];
@@ -58,6 +59,7 @@
         self.commentButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         self.commentButton.layer.anchorPoint = CGPointMake(0.5, 0.0);
         [self.commentButton setBackgroundImage:commentImage forState:UIControlStateNormal];
+        [self.commentButton setBackgroundImage:commentImageClicked forState:UIControlStateHighlighted];
         [self addSubview:self.commentButton];
     }
     return self;

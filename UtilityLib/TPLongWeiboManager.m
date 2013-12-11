@@ -62,8 +62,7 @@ static TPLongWeiboManager *instance = nil;
     TPLongWeiboItemInfo *info = [[TPLongWeiboItemInfo alloc] init];
     info.imageID = self.currentID;
     info.thumnailImage = thumbnail;
-    
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         // 先存缩略
         BOOL success = [NSKeyedArchiver archiveRootObject:info toFile:[self ThumbnailFliePath]];
         
@@ -81,7 +80,7 @@ static TPLongWeiboManager *instance = nil;
 }
 
 - (void)readAllThumbnailImagesWithCompletionHandler:(ThumnailImageHandler)handler{
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSFileManager *fileManager = [[NSFileManager alloc] init];
         NSError *error = nil;
         NSArray *allFileNames = [fileManager contentsOfDirectoryAtPath:[self thumbnailSaveDirection] error:&error];
@@ -109,7 +108,7 @@ static TPLongWeiboManager *instance = nil;
 }
 
 - (void)readOriginalImageWithID:(int)imageID completionHandler:(OriginalImageHandler)handler{
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSString *filePath = [self OriginalFliePathWithID:imageID];
         NSFileManager *fileManager = [[NSFileManager alloc] init];
         NSData *data = [fileManager contentsAtPath:filePath];
@@ -123,7 +122,7 @@ static TPLongWeiboManager *instance = nil;
 }
 
 - (void)removeLongWeiboWithID:(int)imageID{
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSString *tPath = [self ThumbnailFliePathWithID:imageID];
         NSString *oPath = [self OriginalFliePathWithID:imageID];
         NSFileManager *fileManager = [[NSFileManager alloc] init];

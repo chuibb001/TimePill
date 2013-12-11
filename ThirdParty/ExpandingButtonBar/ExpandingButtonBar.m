@@ -185,7 +185,7 @@
         [view setAlpha:0.0f];
         [view setTransform:scale];
     } completion:^(BOOL finished){
-        [view setAlpha:1.0f];
+        [view setAlpha:0.0f];
         [view setTransform:unScale];
     }];
 }

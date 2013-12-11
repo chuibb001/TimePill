@@ -34,13 +34,12 @@
         self.headImageView.layer.masksToBounds = YES;
         
         [self.contentView addSubview:self.headImageView];
-        self.contentView.backgroundColor = [UIColor blackColor];
         self.selectionStyle = UITableViewCellSelectionStyleGray;
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
-        centerRect = self.contentView.frame;
-        leftRect = CGRectMake(self.contentView.frame.origin.x - 100.0, self.contentView.frame.origin.y, self.contentView.frame.size.width, self.contentView.frame.size.height);
-        currentRect = centerRect;
+//        centerRect = self.contentView.frame;
+//        leftRect = CGRectMake(self.contentView.frame.origin.x - 100.0, self.contentView.frame.origin.y, self.contentView.frame.size.width, self.contentView.frame.size.height);
+//        currentRect = centerRect;
         //UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gestureRecognizerDidPan:)];
         //[self.contentView addGestureRecognizer:pan];
     }

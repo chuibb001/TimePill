@@ -24,8 +24,6 @@
         self.view.backgroundColor = [UIColor blackColor];
         self.hasGesture = NO;
         self.hasShadow = NO;
-        
-        
     }
     return self;
 }
@@ -58,7 +56,7 @@
     [super viewWillAppear:animated];
     [[TPLongWeiboManager sharedInstance] readAllThumbnailImagesWithCompletionHandler:^(NSMutableArray *array) {
         self.listData = array;
-        //NSLog(@"%@",self.listData);
+        NSLog(@"%@",self.listData);
         [self.iCarousel reloadData];
     }];
 }

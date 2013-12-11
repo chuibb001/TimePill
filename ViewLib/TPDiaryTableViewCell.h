@@ -29,9 +29,8 @@
 @property (nonatomic,strong) UIImageView *addBackgroundImageView;
 
 - (void)setDisplayData:(TPDiaryDataModel *)dataModel;
-
--(void)beginAddViewAnimation:(BOOL)isOpen;
-
--(void)setAddButtonHidden:(BOOL)hidden;
+- (void)beginAddViewAnimation:(BOOL)isOpen;
+- (void)setAddButtonHidden:(BOOL)hidden;
+- (void)setAddButtonEnable:(BOOL)enable;
 
 @end

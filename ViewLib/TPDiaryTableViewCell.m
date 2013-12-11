@@ -52,7 +52,7 @@
         // 日记Icon
         self.iconImageView = [[UIImageView alloc] init];
         self.iconImageView.image = [UIImage imageNamed:@"weiboIcon.png"];
-        [self addSubview:self.iconImageView];
+        //[self addSubview:self.iconImageView];
         // 加号按钮
         self.addButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.addButton setBackgroundImage:[UIImage imageNamed:@"bianji.png"] forState:UIControlStateNormal];
@@ -135,9 +135,14 @@
     }
 }
 
--(void)setAddButtonHidden:(BOOL)hidden
+- (void)setAddButtonHidden:(BOOL)hidden
 {
     self.addButton.hidden = hidden;
+}
+
+- (void)setAddButtonEnable:(BOOL)enable
+{
+    self.addButton.userInteractionEnabled = enable;
 }
 
 @end

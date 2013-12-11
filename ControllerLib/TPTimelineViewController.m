@@ -527,7 +527,7 @@
     shouldHideAddButton = YES;
     [self.timelineTableView reloadData];
     
-    CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, FALSE);  // 先休眠一下 因为load图是在另一个线程
+    CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, FALSE);  // 先休眠一下 因为load图是在另一个线程
     
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.view.frame.size.width, self.timelineTableView.contentSize.height), NO, 0.0);
     [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -560,7 +560,8 @@
     self.menuButtonBar.userInteractionEnabled = enable;
     self.headView.userInteractionEnabled = enable;
     NSArray *array = [self.timelineTableView visibleCells];
-    for (TPTimelineTableViewTextCell * cell in array) {
+    
+    for (id cell in array) {
         [cell setAddButtonEnable:enable];
     }
 }
@@ -658,18 +659,15 @@
     UIButton *b1 = [UIButton buttonWithType:UIButtonTypeCustom];
     [b1 setFrame:buttonFrame];
     [b1 setImage:[UIImage imageNamed:@"saveToAlbum.png"] forState:UIControlStateNormal];
-    //[b1 setImage:[UIImage imageNamed:@"publishclick.png"] forState:UIControlStateHighlighted];
     [b1 addTarget:self action:@selector(saveToAlbum) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *b2 = [UIButton buttonWithType:UIButtonTypeCustom];
     [b2 setImage:[UIImage imageNamed:@"publishToWeibo.png"] forState:UIControlStateNormal];
-    //[b2 setImage:[UIImage imageNamed:@"weiboku2.png"] forState:UIControlStateHighlighted];
     [b2 setFrame:buttonFrame];
     [b2 addTarget:self action:@selector(shareToWeibo) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *b3 = [UIButton buttonWithType:UIButtonTypeCustom];
     [b3 setImage:[UIImage imageNamed:@"deleteTimeline.png"] forState:UIControlStateNormal];
-    //[b3 setImage:[UIImage imageNamed:@"zhuti2.png"] forState:UIControlStateHighlighted];
     [b3 setFrame:buttonFrame];
     [b3 addTarget:self action:@selector(clearTimeline) forControlEvents:UIControlEventTouchUpInside];
     

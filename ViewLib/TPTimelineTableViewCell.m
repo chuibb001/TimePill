@@ -134,12 +134,13 @@
     [self.addDeleteButton setTitleColor:[UIColor colorWithRed:75./255. green:75./255. blue:75./255. alpha:1.0] forState:UIControlStateNormal];
     [self.addBackgroundImageView addSubview:self.addDeleteButton];
     // 查询评论按钮
-    CGRect commentsButtonFrame =  CGRectMake(60, -10,60, 60);
+    CGRect commentsButtonFrame =  CGRectMake(55, -10,60, 60);
     self.addCommentButton = [[UIButton alloc] initWithFrame:commentsButtonFrame];
-    [self.addCommentButton setImage:[UIImage imageNamed:@"shanchu.png"] forState:UIControlStateNormal];
+    [self.addCommentButton setImage:[UIImage imageNamed:@"tucao.png"] forState:UIControlStateNormal];
     [self.addCommentButton setTitle:@"评论" forState:UIControlStateNormal];
     self.addCommentButton.titleLabel.font = [UIFont boldSystemFontOfSize:15.0];
     self.addCommentButton.titleLabel.textAlignment = UITextAlignmentRight;
+    [self.addCommentButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
     [self.addCommentButton setTitleColor:[UIColor colorWithRed:75./255. green:75./255. blue:75./255. alpha:1.0] forState:UIControlStateNormal];
     [self.addBackgroundImageView addSubview:self.addCommentButton];
     

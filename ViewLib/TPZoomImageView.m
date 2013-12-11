@@ -132,6 +132,7 @@
 -(void)show
 {
     self.scrollView.zoomScale = 1.0;
+    self.scrollView.contentOffset = CGPointMake(0, 0);
     [[[UIApplication sharedApplication] keyWindow] addSubview:self];
     self.imageView.alpha = 0.0;
     self.alpha = 1.0;
