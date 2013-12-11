@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TPLongWeiboItemInfo : NSObject<NSCoding,NSCopying>
+@interface TPLongWeiboItemInfo : NSObject<NSCoding>
 
 @property (nonatomic,assign) int imageID;       // 缩略图ID
 @property (nonatomic,strong) UIImage *thumnailImage;        // 缩略图

@@ -71,10 +71,10 @@
     beginRect = [self fixKeyboardRect:beginRect];
     endRect = [self fixKeyboardRect:endRect];
         
-    CGRect selfBeginRect = CGRectMake(beginRect.origin.x,
-                                       beginRect.origin.y - self.frame.size.height,
-                                       beginRect.size.width,
-                                       self.frame.size.height);
+//    CGRect selfBeginRect = CGRectMake(beginRect.origin.x,
+//                                       beginRect.origin.y - self.frame.size.height,
+//                                       beginRect.size.width,
+//                                       self.frame.size.height);
     
     CGRect selfEndingRect = CGRectMake(endRect.origin.x,
                                        endRect.origin.y - self.frame.size.height,
@@ -97,10 +97,10 @@
     beginRect = [self fixKeyboardRect:beginRect];
     endRect = [self fixKeyboardRect:endRect];
     
-    CGRect selfBeginRect = CGRectMake(beginRect.origin.x,
-                                      beginRect.origin.y - self.frame.size.height,
-                                      beginRect.size.width,
-                                      self.frame.size.height);
+//    CGRect selfBeginRect = CGRectMake(beginRect.origin.x,
+//                                      beginRect.origin.y - self.frame.size.height,
+//                                      beginRect.size.width,
+//                                      self.frame.size.height);
     
     CGRect selfEndingRect = CGRectMake(endRect.origin.x,
                                        endRect.origin.y - self.frame.size.height,

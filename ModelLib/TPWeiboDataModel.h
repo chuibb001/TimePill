@@ -41,7 +41,7 @@ TPWeiboDataUserType;
 /*-----------------------------------
             微博数据模型
  ------------------------------------*/
-@interface TPWeiboDataModel : NSObject<NSCoding,NSCopying>
+@interface TPWeiboDataModel : NSObject<NSCoding>
 
 @property (nonatomic,strong) NSString *weiboId;
 @property (nonatomic,strong) NSString *userName;

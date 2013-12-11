@@ -104,15 +104,15 @@ goto check;
             TQRichTextBaseRun *textRun = [attributes objectForKey:@"TQRichTextAttribute"];
             if (textRun) // 绘制表情
             {
-                CGFloat runAscent,runDescent;
-                CGFloat runWidth  = CTRunGetTypographicBounds(run, CFRangeMake(0,0), &runAscent, &runDescent, NULL);
-                CGFloat runHeight = runAscent + (-runDescent);
-                CGFloat runPointX = drawLineX + CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL);
-                CGFloat runPointY = drawLineY - (-runDescent);
+//                CGFloat runAscent,runDescent;
+//                CGFloat runWidth  = CTRunGetTypographicBounds(run, CFRangeMake(0,0), &runAscent, &runDescent, NULL);
+//                CGFloat runHeight = runAscent + (-runDescent);
+//                CGFloat runPointX = drawLineX + CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL);
+//                CGFloat runPointY = drawLineY - (-runDescent);
 
-                CGRect runRect = CGRectMake(runPointX, runPointY, runWidth, runHeight);
+//                CGRect runRect = CGRectMake(runPointX, runPointY, runWidth, runHeight);
                 
-                BOOL isDraw = [textRun drawRunWithRect:runRect];
+//                BOOL isDraw = [textRun drawRunWithRect:runRect];
                 
 //                if (textRun.isResponseTouch)  // URL手势
 //                {

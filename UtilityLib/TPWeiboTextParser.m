@@ -209,7 +209,6 @@
 }
 - (CGSize)sizeWithRawString:(NSString *)string constrainsToWidth:(CGFloat)width Font:(UIFont *)font
 {
-    float total_height = 0;
     
     NSAttributedString *attString = [self analyzeText:string Font:font];
     

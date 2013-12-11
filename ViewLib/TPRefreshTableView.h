@@ -102,14 +102,6 @@
 // Helper to show/hide -footerView
 - (void) setFooterViewVisibility:(BOOL)visible;
 
-#pragma mark -
-
-// A helper method that calls refreshCompleted and/or loadMoreCompleted if any are active.
-- (void) allLoadingCompleted;
-
-#pragma mark -
-
-- (void) releaseViewComponents;
 
 // 在Controller实现UIScrollViewDelegate,然后间接调用以下三个函数
 -(void)beginScroll;

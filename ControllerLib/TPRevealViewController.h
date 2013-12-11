@@ -17,6 +17,8 @@ typedef enum
 }
 TPRevealViewControllerType;
 
+@protocol TPRevealViewControllerDelegate;
+
 @interface TPRevealViewController : UIViewController<UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) UIViewController *leftViewController;
@@ -24,9 +26,9 @@ TPRevealViewControllerType;
 @property (nonatomic,strong) UIViewController *rootViewController;
 @property (nonatomic,assign) CGFloat leftOffSet;
 @property (nonatomic,assign) CGFloat rightOffSet;
+@property (nonatomic,assign) id<TPRevealViewControllerDelegate> delegate;
 
-
-+(id)sharedInstance;
++(instancetype)sharedInstance;
 
 /**
  *  show viewcontroller
@@ -50,5 +52,13 @@ TPRevealViewControllerType;
  *  is showing root viewcontroller
  */
 -(BOOL)isCentered;
+
+@end
+
+
+@protocol TPRevealViewControllerDelegate <NSObject>
+
+- (void)revealViewController:(TPRevealViewController *)controller willShowControllerWithType:(TPRevealViewControllerType)type;
+- (void)revealViewController:(TPRevealViewController *)controller didShowControllerWithType:(TPRevealViewControllerType)type;
 
 @end

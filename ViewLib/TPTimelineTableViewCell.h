@@ -47,6 +47,8 @@ typedef void(^CommentButtonHandler)(void);
 
 -(void)setAddButtonHidden:(BOOL)hidden;
 
+-(void)setAddButtonEnable:(BOOL)enable;
+
 @end
 
 @interface TPTimelineTableViewTextWithImageCell : TPTimelineTableViewTextCell<TPAbstractViewDelegate>

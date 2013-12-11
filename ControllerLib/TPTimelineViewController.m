@@ -30,6 +30,8 @@
     [self initTableView];
     [self initNavigation];
     [self loadUserInfo];
+    
+    [TPRevealViewController sharedInstance].delegate = self;
 }
 -(void)viewDidUnload
 {
@@ -276,8 +278,9 @@
         userInfoModel.name = [responseDic objectForKey:@"screen_name"];
         userInfoModel.profileImageURL = [responseDic objectForKey:@"profile_image_url"];
         
-        if(!userInfoModel.isPersonallySet)
-            [[TPImageDownloadCenter sharedInstance] loadImageWithURL:userInfoModel.profileImageURL Type:TPWeiboImageTypeHead ViewDelegate:self.headView ModelDelegate:userInfoModel ProgressDelegate:nil];
+        if(!userInfoModel.isPersonallySet) {
+            [self.headView.headImageView setImageWithURL:[NSURL URLWithString:userInfoModel.profileImageURL]];
+        }
     }
     
 }
@@ -389,26 +392,18 @@
 - (void)saveToAlbum
 {
     [self.menuButtonBar hideButtonsAnimated:YES];
-    [SVProgressHUD showWithStatus:@"请稍后…" maskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD showWithStatus:@"正在生成,请稍后…" maskType:SVProgressHUDMaskTypeClear];
     [self makeLongWeibo];
     UIImageWriteToSavedPhotosAlbum(self.longWeiboImage, nil, nil, nil);
-    [SVProgressHUD showSuccessWithStatus:@"成功保存到相册!"];
+    [SVProgressHUD showSuccessWithStatus:@"成功保存到相册"];
     
     [[TPLongWeiboManager sharedInstance] saveLongWeibo:self.longWeiboImage completionHandler:^(BOOL success){}];
     
-//    [[TPLongWeiboManager sharedInstance] readAllThumbnailImagesWithCompletionHandler:^(NSMutableArray *array){
-//    
-//    }];
-    
-//    [[TPLongWeiboManager sharedInstance] readOriginalImageWithID:7 completionHandler:^(UIImage *image){
-//        
-//    }];
-    //[[TPLongWeiboManager sharedInstance] removeLongWeiboWithID:7];
 }
 - (void)shareToWeibo
 {
     [self.menuButtonBar hideButtonsAnimated:YES];
-    [SVProgressHUD showWithStatus:@"请稍后…" maskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD showWithStatus:@"正在生成,请稍后…" maskType:SVProgressHUDMaskTypeClear];
     [self makeLongWeibo];
     TPCreateDiaryViewController *create = [[TPCreateDiaryViewController alloc] init];
     create.longWeiboImage = self.longWeiboImage;
@@ -418,7 +413,7 @@
 - (void)clearTimeline
 {
     [self.menuButtonBar hideButtonsAnimated:YES];
-    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:nil message:@"确定要清空吗?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:nil message:@"你将清空当前的时间轴,确定要继续?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [alert show];
 }
 
@@ -507,6 +502,14 @@
     [self.timelineTableView reloadData];
 }
 
+#pragma mark Theme TPRevealViewControllerDelegate
+-(void)revealViewController:(TPRevealViewController *)controller didShowControllerWithType:(TPRevealViewControllerType)type {
+    if (type == TPRevealViewControllerCenter) {
+        [self enaleUserInterface:YES];
+    } else {
+        [self enaleUserInterface:NO];
+    }
+}
 #pragma mark private
 -(void)makeLongWeibo
 {
@@ -551,6 +554,16 @@
     }
 }
 
+-(void)enaleUserInterface:(BOOL)enable
+{
+    self.timelineTableView.scrollEnabled = enable;
+    self.menuButtonBar.userInteractionEnabled = enable;
+    self.headView.userInteractionEnabled = enable;
+    NSArray *array = [self.timelineTableView visibleCells];
+    for (TPTimelineTableViewTextCell * cell in array) {
+        [cell setAddButtonEnable:enable];
+    }
+}
 
 #pragma mark init
 -(void)initBackground

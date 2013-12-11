@@ -17,7 +17,7 @@ typedef enum
 }
 TPTimelineDataModelType;
 
-@interface TPTimelineDataModel : NSObject<NSCoding,NSCopying>
+@interface TPTimelineDataModel : NSObject<NSCoding>
 
 @property (nonatomic,strong) TPWeiboDataModel *weiboDataModel;
 @property (nonatomic,strong) TPDiaryDataModel *diaryDataModel;

@@ -248,13 +248,10 @@ static TPSinaWeiboAccountService * accountService = nil;
     }
     else
     {
-        NSString *error_description = [errorInfo objectForKey:@"error_description"];
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  errorInfo, @"error",
-                                  error_description, NSLocalizedDescriptionKey, nil];
-        NSError *error = [NSError errorWithDomain:kSinaWeiboSDKErrorDomain
-                                             code:[error_code intValue]
-                                         userInfo:userInfo];
+//        NSString *error_description = [errorInfo objectForKey:@"error_description"];
+//        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                  errorInfo, @"error",
+//                                  error_description, NSLocalizedDescriptionKey, nil];
         
     }
 }
@@ -284,25 +281,25 @@ static TPSinaWeiboAccountService * accountService = nil;
             else if ([TPSinaWeiboCommonFuction getParamValueFromUrl:urlString paramName:@"sso_error_invalid_params"])
             {
                 // 授权失败
-                NSString *error_description = @"Invalid sso params";
-                NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                                          error_description, NSLocalizedDescriptionKey, nil];
-                NSError *error = [NSError errorWithDomain:kSinaWeiboSDKErrorDomain
-                                                     code:kSinaWeiboSDKErrorCodeSSOParamsError
-                                                 userInfo:userInfo];
+//                NSString *error_description = @"Invalid sso params";
+//                NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                          error_description, NSLocalizedDescriptionKey, nil];
+//                NSError *error = [NSError errorWithDomain:kSinaWeiboSDKErrorDomain
+//                                                     code:kSinaWeiboSDKErrorCodeSSOParamsError
+//                                                 userInfo:userInfo];
             }
             else if ([TPSinaWeiboCommonFuction getParamValueFromUrl:urlString paramName:@"error_code"])
             {
-                NSString *error_code = [TPSinaWeiboCommonFuction getParamValueFromUrl:urlString paramName:@"error_code"];
-                NSString *error = [TPSinaWeiboCommonFuction getParamValueFromUrl:urlString paramName:@"error"];
-                NSString *error_uri = [TPSinaWeiboCommonFuction getParamValueFromUrl:urlString paramName:@"error_uri"];
-                NSString *error_description = [TPSinaWeiboCommonFuction getParamValueFromUrl:urlString paramName:@"error_description"];
+//                NSString *error_code = [TPSinaWeiboCommonFuction getParamValueFromUrl:urlString paramName:@"error_code"];
+//                NSString *error = [TPSinaWeiboCommonFuction getParamValueFromUrl:urlString paramName:@"error"];
+//                NSString *error_uri = [TPSinaWeiboCommonFuction getParamValueFromUrl:urlString paramName:@"error_uri"];
+//                NSString *error_description = [TPSinaWeiboCommonFuction getParamValueFromUrl:urlString paramName:@"error_description"];
                 
-                NSDictionary *errorInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                                           error, @"error",
-                                           error_uri, @"error_uri",
-                                           error_code, @"error_code",
-                                           error_description, @"error_description", nil];
+//                NSDictionary *errorInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                           error, @"error",
+//                                           error_uri, @"error_uri",
+//                                           error_code, @"error_code",
+//                                           error_description, @"error_description", nil];
                             }
             else
             {

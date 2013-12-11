@@ -15,7 +15,7 @@
 #define kTimelineCommentTextSize CGSizeMake(143.0, 100.0)
 #define kTimelineCommentTextFont [UIFont systemFontOfSize:14.0]
 
-@interface TPCommentDataModel : NSObject<NSCoding,NSCopying>
+@interface TPCommentDataModel : NSObject<NSCoding>
 
 @property (nonatomic, strong) NSString *commentId;
 @property (nonatomic, strong) NSString *userName;

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TPImageDownloadCenter.h"
 
-@interface TPFriendDataModel : NSObject<NSCoding,NSCopying>
+@interface TPFriendDataModel : NSObject<NSCoding>
 
 @property (nonatomic,strong) NSString *userID;
 @property (nonatomic,strong) NSString *name;

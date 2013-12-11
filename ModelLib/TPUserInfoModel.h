@@ -10,7 +10,7 @@
 #import "TPImageDownloadCenter.h"
 #import "TPUtil.h"
 
-@interface TPUserInfoModel : NSObject<NSCoding,NSCopying>
+@interface TPUserInfoModel : NSObject<NSCoding>
 
 @property (nonatomic,strong) NSString *userID;
 @property (nonatomic,strong) NSString *name;

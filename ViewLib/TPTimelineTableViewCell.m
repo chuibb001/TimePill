@@ -181,6 +181,11 @@
     self.addButton.hidden = hidden;
 }
 
+-(void)setAddButtonEnable:(BOOL)enable
+{
+    self.addButton.userInteractionEnabled = enable;
+}
+
 #pragma mark UITableView
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

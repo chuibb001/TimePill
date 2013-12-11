@@ -35,7 +35,7 @@ TPRevealSwipeDirection;
 
 static TPRevealViewController *instance;
 
-+ (id)sharedInstance
++ (instancetype)sharedInstance
 {
     if(!instance)
         instance = [[TPRevealViewController alloc] init];
@@ -109,20 +109,26 @@ static TPRevealViewController *instance;
             
         }
         
+        TPRevealViewControllerType endType;
+        
         if (minX > 0) {
             if (!shouldQuickSwipe) {
                 if (minX < self.leftOffSet / 2) {
                     endRect = self.centerRect;
+                    endType = TPRevealViewControllerCenter;
                 } else {
                     endRect = self.rightRect;
+                    endType = TPRevealViewControllerLeft;
                 }
             } else {
                 switch (self.direction) {
                     case TPRevealSwipeDirectionLeft:
                         endRect = self.centerRect;
+                        endType = TPRevealViewControllerCenter;
                         break;
                     case TPRevealSwipeDirectionRight:
                         endRect = self.rightRect;
+                        endType = TPRevealViewControllerLeft;
                         break;
                     default:
                         break;
@@ -134,16 +140,20 @@ static TPRevealViewController *instance;
                 CGFloat mid = (320 + 320 - self.rightOffSet) / 2;
                 if (maxX < mid) {
                     endRect = self.leftRect;
+                    endType = TPRevealViewControllerRight;
                 } else {
                     endRect = self.centerRect;
+                    endType = TPRevealViewControllerCenter;
                 }
             } else {
                 switch (self.direction) {
                     case TPRevealSwipeDirectionLeft:
                         endRect = self.leftRect;
+                        endType = TPRevealViewControllerRight;
                         break;
                     case TPRevealSwipeDirectionRight:
                         endRect = self.centerRect;
+                        endType = TPRevealViewControllerCenter;
                         break;
                     default:
                         break;
@@ -159,12 +169,21 @@ static TPRevealViewController *instance;
         // start animation
         if(!CGRectEqualToRect(endRect, CGRectZero))
         {
+            // response to the delegate
+            if (self.delegate && [self.delegate respondsToSelector:@selector(revealViewController:willShowControllerWithType:)]) {
+                [self.delegate revealViewController:self willShowControllerWithType:endType];
+            }
+            // animation begins
             [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
             [UIView animateWithDuration:timeInterval animations:^{
                 self.rootViewController.view.frame = endRect;
             } completion:^(BOOL Finished){
                 self.rootViewController.view.frame = endRect;
                 self.baseRect = endRect;
+                // response to the delegate
+                if (self.delegate && [self.delegate respondsToSelector:@selector(revealViewController:didShowControllerWithType:)]) {
+                    [self.delegate revealViewController:self didShowControllerWithType:endType];
+                }
             }];
         }
     }
@@ -202,6 +221,10 @@ static TPRevealViewController *instance;
         self.rootViewController.view.frame = self.centerRect;
         self.baseRect = self.centerRect;
     }
+    // response to the delegate
+    if (self.delegate && [self.delegate respondsToSelector:@selector(revealViewController:didShowControllerWithType:)]) {
+        [self.delegate revealViewController:self didShowControllerWithType:TPRevealViewControllerCenter];
+    }
 }
 
 -(void)showLeftViewControllerAnimated:(BOOL)animate
@@ -229,6 +252,10 @@ static TPRevealViewController *instance;
         self.rootViewController.view.frame = self.rightRect;
         self.baseRect = self.rightRect;
     }
+    // response to the delegate
+    if (self.delegate && [self.delegate respondsToSelector:@selector(revealViewController:didShowControllerWithType:)]) {
+        [self.delegate revealViewController:self didShowControllerWithType:TPRevealViewControllerLeft];
+    }
 }
 
 -(void)showRightViewControllerAnimated:(BOOL)animate
@@ -255,6 +282,10 @@ static TPRevealViewController *instance;
     {
         self.rootViewController.view.frame = self.leftRect;
         self.baseRect = self.leftRect;
+    }
+    // response to the delegate
+    if (self.delegate && [self.delegate respondsToSelector:@selector(revealViewController:didShowControllerWithType:)]) {
+        [self.delegate revealViewController:self didShowControllerWithType:TPRevealViewControllerRight];
     }
 }
 

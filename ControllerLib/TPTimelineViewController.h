@@ -25,7 +25,7 @@
 #import "TPCreateDiaryViewController.h"
 #import "TPLongWeiboManager.h"
 
-@interface TPTimelineViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface TPTimelineViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,TPRevealViewControllerDelegate>
 {
     NSIndexPath *lastAddViewIndexPath;
     NSIndexPath *currentAddViewIndexPath;

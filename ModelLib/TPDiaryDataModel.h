@@ -10,7 +10,7 @@
 #import "TPWeiboTextParser.h"
 #import "TPWeiboDataModel.h"
 
-@interface TPDiaryDataModel : NSObject<NSCoding,NSCopying>
+@interface TPDiaryDataModel : NSObject<NSCoding>
 
 @property (nonatomic,strong) NSString *rawText;
 @property (nonatomic,strong) UIImage *image;
