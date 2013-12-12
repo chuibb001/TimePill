@@ -507,11 +507,12 @@ NSInteger compareViewDepth(id obj1, id obj2, void *context)
     
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
     
-	view.center = CGPointMake(view.bounds.size.width/2.0f, view.bounds.size.height/2.0f);
+	view.center = CGPointMake(view.bounds.size.width/2.0f, view.bounds.size.height/2.0f + 30);
     view.superview.center = CGPointMake(self.bounds.size.width/2.0f + contentOffset.width,
 										self.bounds.size.height/2.0f + contentOffset.height);
      if (IS_IPHONE_5) {
-           view.superview.layer.anchorPoint = CGPointMake(0.5f, 0.4f);
+         view.center = CGPointMake(view.bounds.size.width/2.0f, view.bounds.size.height/2.0f - 10.0);
+         view.superview.layer.anchorPoint = CGPointMake(0.5f, 0.4f);
           }
 
 #else

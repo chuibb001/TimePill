@@ -6,13 +6,13 @@
 //  Copyright (c) 2013年 simon. All rights reserved.
 //
 
-#import "TPNewFeatherViewController.h"
+#import "TPNewFeatureViewController.h"
 
-@interface TPNewFeatherViewController ()
+@interface TPNewFeatureViewController ()
 
 @end
 
-@implementation TPNewFeatherViewController
+@implementation TPNewFeatureViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,6 +28,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
     // 引导图
     NSArray *array = @[[UIImage imageNamed:@"jieshao1.png"],[UIImage imageNamed:@"jieshao2.png"],[UIImage imageNamed:@"jieshao3.png"]];
     

@@ -8,6 +8,9 @@
 
 #import "TPTimelineViewController.h"
 
+#define kTPActionSheetHeadTag 1000
+#define kTPActionSheetShareTag 1001
+
 @interface TPTimelineViewController ()
 
 @end
@@ -23,7 +26,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(DiaryPublishNotification:) name:kTPDiaryPublishNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ApplicationWillResignActiveNotification:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserInfoNotification:) name:kTPSinaWeiboEngineUserInfoNotification object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UploadStatusNotification:) name:kTPSinaWeiboEngineUploadStatusNotification object:nil];
     [self initBackground];
     [self initHeadView];
     [self initData];
@@ -194,8 +197,8 @@
     if (cell == nil) {
         cell = [[TPDiaryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         [cell.addButton addTarget:self action:@selector(addButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        cell.addButton.tag = indexPath.row;
     }
+    cell.addButton.tag = indexPath.row;
     [cell setDisplayData:dataModel];
     [cell beginAddViewAnimation:timelineData.isAddViewOpen];
     [cell setAddButtonHidden:shouldHideAddButton];
@@ -265,7 +268,7 @@
     [[TPUtil sharedInstance] saveTimelineList:self.listData];
     [[TPUtil sharedInstance] saveUserInfo:[TPUserInfoModel sharedInstance]];
 }
--(void)UserInfoNotification:(NSNotification *)note
+- (void)UserInfoNotification:(NSNotification *)note
 {
     NSDictionary *dic = note.object;
     NSError *error = dic[kTPSinaWeiboEngineErrorCodeKey];
@@ -282,7 +285,16 @@
             [self.headView.headImageView setImageWithURL:[NSURL URLWithString:userInfoModel.profileImageURL]];
         }
     }
-    
+}
+- (void)UploadStatusNotification:(NSNotification *)note
+{
+    NSDictionary *dic = note.object;
+    NSError *error = dic[kTPSinaWeiboEngineErrorCodeKey];
+    if (error.code == 200) {
+        [SVProgressHUD showSuccessWithStatus:@"成功分享到微博"];
+    } else {
+        [SVProgressHUD showSuccessWithStatus:@"分享失败"];
+    }
 }
 
 #pragma mark Button Clicked
@@ -387,6 +399,7 @@
 -(void)headImafeViewdidTap
 {
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"更换头像" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册选择", nil];
+    sheet.tag = kTPActionSheetHeadTag;
     [sheet showInView:self.view];
 }
 - (void)saveToAlbum
@@ -400,15 +413,12 @@
     [[TPLongWeiboManager sharedInstance] saveLongWeibo:self.longWeiboImage completionHandler:^(BOOL success){}];
     
 }
-- (void)shareToWeibo
+- (void)shareTo
 {
     [self.menuButtonBar hideButtonsAnimated:YES];
-    [SVProgressHUD showWithStatus:@"正在生成,请稍后…" maskType:SVProgressHUDMaskTypeClear];
-    [self makeLongWeibo];
-    TPCreateDiaryViewController *create = [[TPCreateDiaryViewController alloc] init];
-    create.longWeiboImage = self.longWeiboImage;
-    [SVProgressHUD dismiss];
-    [self presentModalViewController:[[TPNavigationViewController alloc] initWithRootViewController:create] animated:YES];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"分享我的时间轴" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享到新浪微博",@"分享给微信好友",@"分享到微信朋友圈", nil];
+    sheet.tag = kTPActionSheetShareTag;
+    [sheet showInView:self.view];
 }
 - (void)clearTimeline
 {
@@ -458,28 +468,62 @@
 #pragma mark UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.delegate = self;
-    imagePicker.allowsEditing = YES;
-    
-    switch (buttonIndex) {
-        case 0:
-            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    if (actionSheet.tag == kTPActionSheetShareTag) {
+        switch (buttonIndex) {
+            case 0:  // weibo
             {
-                imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera ;
-                [self presentModalViewController:imagePicker animated:YES];
+                [self performSelector:@selector(doShareToWeibo) withObject:nil afterDelay:0.1];
+
             }
-            break;
-        case 1:
-            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+                break;
+            case 1:  // weixin session
             {
-                imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                [self presentModalViewController:imagePicker animated:YES];
+                if ([WXApi isWXAppInstalled]) {
+                    [self performSelector:@selector(doShareToWeixinSession) withObject:nil afterDelay:0.1];
+                } else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败" message:@"你还没有安装微信!" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
+                    [alert show];
+                }
+                
             }
-            break;
-            
-        default:
-            break;
+                break;
+            case 2:  // weixin timeline
+            {
+                if ([WXApi isWXAppInstalled]) {
+                    [self performSelector:@selector(doShareToWeixinTimeline) withObject:nil afterDelay:0.1];
+                } else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败" message:@"你还没有安装微信!" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
+                    [alert show];
+                }
+            }
+            default:
+                break;
+        }
+
+    } else {
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        imagePicker.allowsEditing = YES;
+        
+        switch (buttonIndex) {
+            case 0:
+                if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+                {
+                    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera ;
+                    [self presentModalViewController:imagePicker animated:YES];
+                }
+                break;
+            case 1:
+                if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+                {
+                    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    [self presentModalViewController:imagePicker animated:YES];
+                }
+                break;
+                
+            default:
+                break;
+        }
     }
 }
 #pragma mark UIImagePickerControllerDelegate
@@ -508,7 +552,26 @@
         [self enaleUserInterface:YES];
     } else {
         [self enaleUserInterface:NO];
+        [[TPGuideManager sharedInstance] removeAllGuides];
     }
+}
+
+#pragma mark ExpandingButtonBarDelegate
+- (void) expandingBarWillAppear:(ExpandingButtonBar*)bar
+{
+    [[TPGuideManager sharedInstance] showMenuGuide];
+}
+- (void) expandingBarDidAppear:(ExpandingButtonBar *)bar
+{
+    
+}
+- (void) expandingBarWillDisappear:(ExpandingButtonBar *)bar
+{
+    [[TPGuideManager sharedInstance] removeAllGuides];
+}
+- (void) expandingBarDidDisappear:(ExpandingButtonBar *)bar
+{
+    
 }
 #pragma mark private
 -(void)makeLongWeibo
@@ -546,7 +609,7 @@
     self.menuButtonBar.hidden = NO;
 }
 
--(void)loadUserInfo
+- (void)loadUserInfo
 {
     if([[TPSinaWeiboEngine sharedInstance] isLogon])
     {
@@ -554,7 +617,7 @@
     }
 }
 
--(void)enaleUserInterface:(BOOL)enable
+- (void)enaleUserInterface:(BOOL)enable
 {
     self.timelineTableView.scrollEnabled = enable;
     self.menuButtonBar.userInteractionEnabled = enable;
@@ -564,6 +627,32 @@
     for (id cell in array) {
         [cell setAddButtonEnable:enable];
     }
+}
+
+- (void)doShareToWeibo
+{
+    [SVProgressHUD showWithStatus:@"正在生成,请稍后…" maskType:SVProgressHUDMaskTypeClear];
+    [self makeLongWeibo];
+    TPCreateDiaryViewController *create = [[TPCreateDiaryViewController alloc] init];
+    create.longWeiboImage = self.longWeiboImage;
+    [SVProgressHUD dismiss];
+    [self presentModalViewController:[[TPNavigationViewController alloc] initWithRootViewController:create] animated:YES];
+}
+
+- (void)doShareToWeixinTimeline
+{
+    [SVProgressHUD showWithStatus:@"正在生成,请稍后…" maskType:SVProgressHUDMaskTypeClear];
+    [self makeLongWeibo];
+    [SVProgressHUD dismiss];
+    [[TPWeixinShareManager sharedInstance] sendImageToTimeline:self.longWeiboImage];
+}
+
+- (void)doShareToWeixinSession
+{
+    [SVProgressHUD showWithStatus:@"正在生成,请稍后…" maskType:SVProgressHUDMaskTypeClear];
+    [self makeLongWeibo];
+    [SVProgressHUD dismiss];
+    [[TPWeixinShareManager sharedInstance] sendImageToSession:self.longWeiboImage];
 }
 
 #pragma mark init
@@ -664,7 +753,7 @@
     UIButton *b2 = [UIButton buttonWithType:UIButtonTypeCustom];
     [b2 setImage:[UIImage imageNamed:@"publishToWeibo.png"] forState:UIControlStateNormal];
     [b2 setFrame:buttonFrame];
-    [b2 addTarget:self action:@selector(shareToWeibo) forControlEvents:UIControlEventTouchUpInside];
+    [b2 addTarget:self action:@selector(shareTo) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *b3 = [UIButton buttonWithType:UIButtonTypeCustom];
     [b3 setImage:[UIImage imageNamed:@"deleteTimeline.png"] forState:UIControlStateNormal];
@@ -678,6 +767,7 @@
     [self.menuButtonBar setDelay:0.00];
     [self.menuButtonBar setExplode:YES];
     [self.menuButtonBar setSpin:YES];
+    self.menuButtonBar.delegate = self;
 }
 -(void)initDefaultImageView
 {

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface TPNewFeatherViewController : UIViewController<UIScrollViewDelegate>
+@interface TPNewFeatureViewController : UIViewController<UIScrollViewDelegate>
 
 @property (strong, nonatomic) UIScrollView *pageScroll;
 @property (strong, nonatomic) UIPageControl *pageControl;

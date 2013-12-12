@@ -18,6 +18,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(KeyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
         
         [self setupButtons];
+        
         self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"rectangle.png"]];
     }
     return self;
@@ -26,38 +27,38 @@
 #pragma mark Init
 -(void)setupButtons
 {
-    CGFloat buttonWidth = CGRectGetWidth(self.frame) / 5;
+    CGFloat buttonWidth = CGRectGetWidth(self.frame) / 3;
     CGFloat buttonHeight = CGRectGetHeight(self.frame);
     
-    // 定位按钮
-    self.locationButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.locationButton.frame = CGRectMake(0, 0, buttonWidth, buttonHeight);
-    [self.locationButton setImage:[UIImage imageNamed:@"position.png"] forState:UIControlStateNormal];
-    [self addSubview:self.locationButton];
+//    // 定位按钮
+//    self.locationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    self.locationButton.frame = CGRectMake(0, 0, buttonWidth, buttonHeight);
+//    [self.locationButton setImage:[UIImage imageNamed:@"position.png"] forState:UIControlStateNormal];
+//    [self addSubview:self.locationButton];
     
     // 表情按钮
     self.emotionButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.emotionButton.frame = CGRectMake(buttonWidth, 0, buttonWidth, buttonHeight);
+    self.emotionButton.frame = CGRectMake(0, 0, buttonWidth, buttonHeight);
     [self.emotionButton setImage:[UIImage imageNamed:@"motion.png"] forState:UIControlStateNormal];
     [self addSubview:self.emotionButton];
     
     // 照片按钮
     self.photoButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.photoButton.frame = CGRectMake(buttonWidth * 2, 0, buttonWidth, buttonHeight);
+    self.photoButton.frame = CGRectMake(buttonWidth * 1, 0, buttonWidth, buttonHeight);
     [self.photoButton setImage:[UIImage imageNamed:@"photo.png"] forState:UIControlStateNormal];
     [self addSubview:self.photoButton];
     
     // 画板按钮
     self.paintingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.paintingButton.frame = CGRectMake(buttonWidth * 3, 0, buttonWidth, buttonHeight);
+    self.paintingButton.frame = CGRectMake(buttonWidth * 2, 0, buttonWidth, buttonHeight);
     [self.paintingButton setImage:[UIImage imageNamed:@"paint.png"] forState:UIControlStateNormal];
     [self addSubview:self.paintingButton];
     
-    // 分享按钮
-    self.shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.shareButton.frame = CGRectMake(buttonWidth * 4, 0, buttonWidth, buttonHeight);
-    [self.shareButton setImage:[UIImage imageNamed:@"share.png"] forState:UIControlStateNormal];
-    [self addSubview:self.shareButton];
+//    // 分享按钮
+//    self.shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    self.shareButton.frame = CGRectMake(buttonWidth * 4, 0, buttonWidth, buttonHeight);
+//    [self.shareButton setImage:[UIImage imageNamed:@"share.png"] forState:UIControlStateNormal];
+//    [self addSubview:self.shareButton];
 }
 
 #pragma mark Notification

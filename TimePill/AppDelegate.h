@@ -12,11 +12,11 @@
 #import "TPRightMenuViewController.h"
 #import "TPTimelineViewController.h"
 #import "TPNavigationViewController.h"
-#import "TPNewFeatherViewController.h"
+#import "TPNewFeatureViewController.h"
 
 @class ViewController;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

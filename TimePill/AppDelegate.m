@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "WXApi.h"
 
 @implementation AppDelegate
 
@@ -30,10 +31,12 @@
     BOOL first = [[NSUserDefaults standardUserDefaults] boolForKey:kTPUpgradeKey];
     if (!first) {
         // new feather
-        TPNewFeatherViewController *new = [[TPNewFeatherViewController alloc] init];
+        TPNewFeatureViewController *new = [[TPNewFeatureViewController alloc] init];
         [new show];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kTPUpgradeKey];
     }
+    
+    [WXApi registerApp:@"wx7a462ae4bbc68095"];
     
     return YES;
 }
@@ -65,4 +68,34 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+#pragma mark WXApiDelegate
+-(void) onReq:(BaseReq*)req
+{
+    
+}
+
+-(void) onResp:(BaseResp*)resp
+{
+    if([resp isKindOfClass:[SendMessageToWXResp class]]) {
+        int errorCode = resp.errCode;
+        switch (errorCode) {
+            case 0:
+                [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+                break;
+            default:
+                [SVProgressHUD showSuccessWithStatus:@"分享失败"];
+                break;
+        }
+    }
+}
 @end

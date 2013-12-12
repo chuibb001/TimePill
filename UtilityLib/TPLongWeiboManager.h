@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TPConst.h"
 
 @interface TPLongWeiboItemInfo : NSObject<NSCoding>
 
@@ -61,5 +62,11 @@ typedef void(^OriginalImageHandler)(UIImage *image);
  *  @param imageID 缩略图ID
  */
 - (void)removeLongWeiboWithID:(int)imageID;
+
+/**
+ *  制作长微博的缩略图
+ *
+ */
+-(UIImage *)resizeImage:(UIImage *)origineImage;
 
 @end

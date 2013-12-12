@@ -30,7 +30,7 @@
 {
     //表情文本数组
     self.emotionsArray1=[[NSArray alloc] initWithObjects:@"[爱你]",@"[悲伤]",@"[闭嘴]",@"[馋嘴]",@"[吃惊]",@"[哈哈]",@"[害羞]",@"[汗]",@"[呵呵]",@"[黑线]",@"[花心]",@"[挤眼]",@"[可爱]",@"[可怜]",@"[酷]",@"[困]",@"[泪]",@"[生病]",@"[失望]",@"[偷笑]",@"[晕]",@"[挖鼻屎]",@"[阴险]",@"[囧]",@"[怒]",@"[good]",@"[给力]",@"[浮云]", nil];
-    self.emotionsArray2=[[NSArray alloc] initWithObjects:@"[嘻嘻]",@"[鄙视]",@"[亲亲]",@"[太开心]",@"[懒得理你]",@"[右哼哼]",@"[左哼哼]",@"[嘘]",@"[衰]",@"[委屈]",@"[吐]",@"[打哈欠]",@"[抱抱]",@"[疑问]",@"[拜拜]",@"[思考]",@"[睡觉]",@"[钱]",@"[哼]",@"[鼓掌]",@"[抓狂]",@"[怒骂]",@"[熊猫]",@"[奥特曼]",@"[猪头]",@"[蜡烛]",@"[蛋糕]",@"[din推撞]", nil];
+    self.emotionsArray2=[[NSArray alloc] initWithObjects:@"[嘻嘻]",@"[鄙视]",@"[亲亲]",@"[太开心]",@"[懒得理你]",@"[右哼哼]",@"[左哼哼]",@"[嘘]",@"[衰]",@"[委屈]",@"[吐]",@"[打哈气]",@"[抱抱]",@"[疑问]",@"[拜拜]",@"[思考]",@"[睡觉]",@"[钱]",@"[哼]",@"[鼓掌]",@"[抓狂]",@"[怒骂]",@"[熊猫]",@"[奥特曼]",@"[猪头]",@"[蜡烛]",@"[蛋糕]",@"[din推撞]", nil];
 }
 
 - (void)initScrollView
@@ -52,7 +52,7 @@
         {
             UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
             button.frame=CGRectMake(18+j*43, 20+i*45, 25, 25);
-            UIImage *image=[UIImage imageNamed:[NSString stringWithFormat:@"w%d.gif",i*7+j]];
+            UIImage *image=[UIImage imageNamed:[NSString stringWithFormat:@"%@.gif",self.emotionsArray1[i*7+j]]];
             [button setImage:image forState:UIControlStateNormal];
             button.tag=i*7+j;
             [button addTarget:self action:@selector(emotionclicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -65,7 +65,7 @@
         {
             UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
             button.frame=CGRectMake(320+18+j*43, 20+i*45, 25, 25);
-            UIImage *image=[UIImage imageNamed:[NSString stringWithFormat:@"r%d.gif",i*7+j]];
+            UIImage *image=[UIImage imageNamed:[NSString stringWithFormat:@"%@.gif",self.emotionsArray2[i*7+j]]];
             [button setImage:image forState:UIControlStateNormal];
             button.tag=28+i*7+j;
             [button addTarget:self action:@selector(emotionclicked:) forControlEvents:UIControlEventTouchUpInside];

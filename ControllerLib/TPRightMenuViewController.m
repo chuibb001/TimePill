@@ -183,7 +183,7 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            UILabel * nameLabel=[[UILabel alloc] initWithFrame:CGRectMake(175, 16, 180, 20)];
+            UILabel * nameLabel=[[UILabel alloc] initWithFrame:CGRectMake(175, 16, 120, 20)];
             nameLabel.backgroundColor = [UIColor clearColor];
             nameLabel.textColor = [UIColor colorWithRed:191./255. green:191./255. blue:191./255. alpha:1.0];
             nameLabel.font = [UIFont boldSystemFontOfSize:16.0];

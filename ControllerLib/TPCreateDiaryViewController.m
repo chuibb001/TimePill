@@ -92,6 +92,12 @@
     [self.keyboardHeaderView.photoButton addTarget:self action:@selector(photoButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.keyboardHeaderView.paintingButton addTarget:self action:@selector(paintingButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.keyboardHeaderView.shareButton addTarget:self action:@selector(shareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // 分享长微博的场景下改下UI
+    if (self.longWeiboImage) {
+        self.keyboardHeaderView.photoButton.hidden = YES;
+        self.keyboardHeaderView.paintingButton.hidden = YES;
+    }
 }
 -(void)initEmotionView
 {
@@ -109,7 +115,12 @@
 }
 -(void)initNavigation
 {
-    self.title = @"写日记";
+    if (self.longWeiboImage) {
+        self.title = @"分享到微博";
+    } else {
+        self.title = @"写日记";
+    }
+    
     //返回按钮
     UIButton *returnBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     returnBtn.frame=CGRectMake(0, 0, 40, 40);
@@ -146,6 +157,7 @@
 -(void)initShareView
 {
     self.shareView = [[TPShareView alloc] initWithFrame:CGRectMake(240, 500, 73.5, 63.5)];
+    [self.shareView.weiboSwitch setIsOn:YES];
     [self.view insertSubview:self.shareView belowSubview:self.keyboardHeaderView];
     
 }
@@ -187,7 +199,11 @@
 {
     if (self.longWeiboImage) {
         if ([[TPSinaWeiboEngine sharedInstance] isLogon]) {
-            [[TPSinaWeiboEngine sharedInstance] postImageStatusWithText:self.textView.text Latitude:nil Longitude:nil Image:self.longWeiboImage];
+            NSString *text = self.textView.text;
+            if (!text || [text isEqualToString:@""]) {
+                text = @"分享图片";
+            }
+            [[TPSinaWeiboEngine sharedInstance] postImageStatusWithText:text Latitude:nil Longitude:nil Image:self.longWeiboImage];
         } else {
             TPLoginViewController *login = [[TPLoginViewController alloc] init];
             [self presentModalViewController:[[TPNavigationViewController alloc] initWithRootViewController:login] animated:YES];
@@ -195,6 +211,14 @@
         
     }
     else {
+        // 没图没文字
+        if (!self.textView.text || [self.textView.text isEqualToString:@""]) {
+            if (!self.previewImageView.image) {
+                [SVProgressHUD showErrorWithStatus:@"写点东西吧!"];
+                return;
+            }
+        }
+        
         TPDiaryDataModel *dataModel = [[TPDiaryDataModel alloc] init];
         dataModel.rawText = self.textView.text;
         NSDate *date = [NSDate date];

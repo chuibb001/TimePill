@@ -24,8 +24,10 @@
 #import "ExpandingButtonBar.h"
 #import "TPCreateDiaryViewController.h"
 #import "TPLongWeiboManager.h"
+#import "TPWeixinShareManager.h"
+#import "TPGuideManager.h"
 
-@interface TPTimelineViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,TPRevealViewControllerDelegate>
+@interface TPTimelineViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,TPRevealViewControllerDelegate,ExpandingButtonBarDelegate>
 {
     NSIndexPath *lastAddViewIndexPath;
     NSIndexPath *currentAddViewIndexPath;

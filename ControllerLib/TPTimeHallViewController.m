@@ -97,7 +97,7 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:thumnailImage];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.layer.masksToBounds = YES;
-    imageView.frame = CGRectMake(70, 60, 250, self.view.frame.size.height * 0.65);
+    imageView.frame = CGRectMake(70, 60, 200, self.view.frame.size.height * 0.65);
     imageView.userInteractionEnabled = YES;
 
     return imageView;
@@ -120,7 +120,6 @@
     } else {
         [[TPRevealViewController sharedInstance] showRootViewControllerAnimated:YES];
     }
-    
     
 }
 

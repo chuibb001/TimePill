@@ -52,7 +52,7 @@
 		562C048017F957FD00F428A9 /* TQRichTextURLRun.m in Sources */ = {isa = PBXBuildFile; fileRef = 562C047A17F957FD00F428A9 /* TQRichTextURLRun.m */; };
 		562C048117F957FD00F428A9 /* TQRichTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 562C047C17F957FD00F428A9 /* TQRichTextView.m */; };
 		562C048317F958F500F428A9 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 562C048217F958F500F428A9 /* CoreText.framework */; };
-		562CB53818191C1D00729476 /* TPNewFeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 562CB53718191C1D00729476 /* TPNewFeatherViewController.m */; };
+		562CB53818191C1D00729476 /* TPNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 562CB53718191C1D00729476 /* TPNewFeatureViewController.m */; };
 		562CB54118191E6800729476 /* enterButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 562CB53918191E6800729476 /* enterButton@2x.png */; };
 		562CB54218191E6800729476 /* jieshao1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 562CB53A18191E6800729476 /* jieshao1@2x.png */; };
 		562CB54318191E6800729476 /* jieshao2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 562CB53B18191E6800729476 /* jieshao2@2x.png */; };
@@ -77,6 +77,11 @@
 		5698B7041807C5220096223B /* noComments@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5698B7031807C5220096223B /* noComments@2x.png */; };
 		5698B7061807D9A70096223B /* zhuanfakuang3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5698B7051807D9A70096223B /* zhuanfakuang3@2x.png */; };
 		5698B7081807E0610096223B /* duihuakuang2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5698B7071807E0610096223B /* duihuakuang2@2x.png */; };
+		56B6883A1859649C006FB2E5 /* TPWeiboActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B688391859649C006FB2E5 /* TPWeiboActivity.m */; };
+		56B6883F18598F1E006FB2E5 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56B6883C18598F1E006FB2E5 /* libWeChatSDK.a */; };
+		56B6884218599004006FB2E5 /* TPWeixinShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B6884118599004006FB2E5 /* TPWeixinShareManager.m */; };
+		56B688441859B620006FB2E5 /* guide@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B688431859B620006FB2E5 /* guide@2x.png */; };
+		56B688471859B6CE006FB2E5 /* TPGuideManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B688461859B6CE006FB2E5 /* TPGuideManager.m */; };
 		56D30493185888F8007038BF /* weiboCommentButtonClicked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56D30492185888F8007038BF /* weiboCommentButtonClicked@2x.png */; };
 		56D3049518589449007038BF /* pencilIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56D3049418589449007038BF /* pencilIcon@2x.png */; };
 		56DB4722181A4AFD00FFC022 /* placesHolderImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56DB4721181A4AFD00FFC022 /* placesHolderImage@2x.png */; };
@@ -470,8 +475,8 @@
 		562C047B17F957FD00F428A9 /* TQRichTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TQRichTextView.h; sourceTree = "<group>"; };
 		562C047C17F957FD00F428A9 /* TQRichTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TQRichTextView.m; sourceTree = "<group>"; };
 		562C048217F958F500F428A9 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		562CB53618191C1D00729476 /* TPNewFeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNewFeatherViewController.h; sourceTree = "<group>"; };
-		562CB53718191C1D00729476 /* TPNewFeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNewFeatherViewController.m; sourceTree = "<group>"; };
+		562CB53618191C1D00729476 /* TPNewFeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNewFeatureViewController.h; sourceTree = "<group>"; };
+		562CB53718191C1D00729476 /* TPNewFeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNewFeatureViewController.m; sourceTree = "<group>"; };
 		562CB53918191E6800729476 /* enterButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enterButton@2x.png"; sourceTree = "<group>"; };
 		562CB53A18191E6800729476 /* jieshao1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jieshao1@2x.png"; sourceTree = "<group>"; };
 		562CB53B18191E6800729476 /* jieshao2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jieshao2@2x.png"; sourceTree = "<group>"; };
@@ -500,6 +505,16 @@
 		5698B7031807C5220096223B /* noComments@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noComments@2x.png"; sourceTree = "<group>"; };
 		5698B7051807D9A70096223B /* zhuanfakuang3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zhuanfakuang3@2x.png"; sourceTree = "<group>"; };
 		5698B7071807E0610096223B /* duihuakuang2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "duihuakuang2@2x.png"; sourceTree = "<group>"; };
+		56B688381859649C006FB2E5 /* TPWeiboActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPWeiboActivity.h; sourceTree = "<group>"; };
+		56B688391859649C006FB2E5 /* TPWeiboActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPWeiboActivity.m; sourceTree = "<group>"; };
+		56B6883C18598F1E006FB2E5 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		56B6883D18598F1E006FB2E5 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		56B6883E18598F1E006FB2E5 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		56B6884018599004006FB2E5 /* TPWeixinShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPWeixinShareManager.h; sourceTree = "<group>"; };
+		56B6884118599004006FB2E5 /* TPWeixinShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPWeixinShareManager.m; sourceTree = "<group>"; };
+		56B688431859B620006FB2E5 /* guide@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide@2x.png"; sourceTree = "<group>"; };
+		56B688451859B6CE006FB2E5 /* TPGuideManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPGuideManager.h; sourceTree = "<group>"; };
+		56B688461859B6CE006FB2E5 /* TPGuideManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPGuideManager.m; sourceTree = "<group>"; };
 		56D30492185888F8007038BF /* weiboCommentButtonClicked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weiboCommentButtonClicked@2x.png"; sourceTree = "<group>"; };
 		56D3049418589449007038BF /* pencilIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pencilIcon@2x.png"; sourceTree = "<group>"; };
 		56DB4721181A4AFD00FFC022 /* placesHolderImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placesHolderImage@2x.png"; sourceTree = "<group>"; };
@@ -903,6 +918,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56B6883F18598F1E006FB2E5 /* libWeChatSDK.a in Frameworks */,
 				562C048317F958F500F428A9 /* CoreText.framework in Frameworks */,
 				562C047117F9491200F428A9 /* ImageIO.framework in Frameworks */,
 				56FD20FF17E86A65005EFA31 /* MapKit.framework in Frameworks */,
@@ -1014,6 +1030,16 @@
 				5698B6FE18079B610096223B /* SVProgressHUD.m */,
 			);
 			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		56B6883B18598F1E006FB2E5 /* WXSDK */ = {
+			isa = PBXGroup;
+			children = (
+				56B6883C18598F1E006FB2E5 /* libWeChatSDK.a */,
+				56B6883D18598F1E006FB2E5 /* WXApi.h */,
+				56B6883E18598F1E006FB2E5 /* WXApiObject.h */,
+			);
+			path = WXSDK;
 			sourceTree = "<group>";
 		};
 		F42DCE95180147180081C32F /* ExpandingButtonBar */ = {
@@ -1157,8 +1183,8 @@
 				F481E63217F6A7950008AB8E /* TPFriendsViewController.m */,
 				F4D8EEF318026D4200732542 /* TPLoginViewController.h */,
 				F4D8EEF418026D4200732542 /* TPLoginViewController.m */,
-				562CB53618191C1D00729476 /* TPNewFeatherViewController.h */,
-				562CB53718191C1D00729476 /* TPNewFeatherViewController.m */,
+				562CB53618191C1D00729476 /* TPNewFeatureViewController.h */,
+				562CB53718191C1D00729476 /* TPNewFeatureViewController.m */,
 				5619D7D318211C390035AD8C /* TPAboutUsViewController.h */,
 				5619D7D418211C390035AD8C /* TPAboutUsViewController.m */,
 				5619D7D518211C390035AD8C /* TPAboutUsViewController.xib */,
@@ -1169,6 +1195,7 @@
 		F4DF6BBE17E5B6C9002D41B2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				56B688431859B620006FB2E5 /* guide@2x.png */,
 				56DB4723181A4AFD00FFC022 /* placesHolderHead@2x.png */,
 				56DB4721181A4AFD00FFC022 /* placesHolderImage@2x.png */,
 				562CB53918191E6800729476 /* enterButton@2x.png */,
@@ -1713,6 +1740,8 @@
 				5627235117F1ACB800FA5483 /* TPUserInfoModel.m */,
 				F481E63417F6A8FA0008AB8E /* TPFriendDataModel.h */,
 				F481E63517F6A8FA0008AB8E /* TPFriendDataModel.m */,
+				56B688381859649C006FB2E5 /* TPWeiboActivity.h */,
+				56B688391859649C006FB2E5 /* TPWeiboActivity.m */,
 			);
 			path = ModelLib;
 			sourceTree = "<group>";
@@ -1720,6 +1749,7 @@
 		F4DF6D1817E5B6C9002D41B2 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				56B6883B18598F1E006FB2E5 /* WXSDK */,
 				5629C7231817F11B00E435C1 /* iCarousel */,
 				5698B6FA18079B610096223B /* SVProgressHUD */,
 				F42DCE95180147180081C32F /* ExpandingButtonBar */,
@@ -1931,6 +1961,10 @@
 				565A7F3017EE8C590049411D /* TPUtil.m */,
 				5645798C18093271005B8736 /* TPLongWeiboManager.h */,
 				5645798D18093271005B8736 /* TPLongWeiboManager.m */,
+				56B6884018599004006FB2E5 /* TPWeixinShareManager.h */,
+				56B6884118599004006FB2E5 /* TPWeixinShareManager.m */,
+				56B688451859B6CE006FB2E5 /* TPGuideManager.h */,
+				56B688461859B6CE006FB2E5 /* TPGuideManager.m */,
 			);
 			path = UtilityLib;
 			sourceTree = "<group>";
@@ -2222,6 +2256,7 @@
 				F4DF6E6617E5B6C9002D41B2 /* fromweibo_click@2x.png in Resources */,
 				F4DF6E6C17E5B6C9002D41B2 /* weibologon@2x.png in Resources */,
 				F4DF6E6D17E5B6C9002D41B2 /* weibologon_click@2x.png in Resources */,
+				56B688441859B620006FB2E5 /* guide@2x.png in Resources */,
 				F4DF6E6F17E5B6C9002D41B2 /* check_unselected@2x.png in Resources */,
 				562CB54418191E6800729476 /* jieshao3@2x.png in Resources */,
 				56D30493185888F8007038BF /* weiboCommentButtonClicked@2x.png in Resources */,
@@ -2308,6 +2343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56B688471859B6CE006FB2E5 /* TPGuideManager.m in Sources */,
 				562C046617F948AE00F428A9 /* SDWebImageDownloader.m in Sources */,
 				562C046517F948AE00F428A9 /* SDWebImageDecoder.m in Sources */,
 				F4DF6B9E17E5B38D002D41B2 /* main.m in Sources */,
@@ -2359,6 +2395,7 @@
 				F4DF6ED317E5B6C9002D41B2 /* TPSinaWeiboFriendsRequest.m in Sources */,
 				F4DF6ED417E5B6C9002D41B2 /* TPSinaWeiboRequest.m in Sources */,
 				562C046917F948AE00F428A9 /* SDWebImagePrefetcher.m in Sources */,
+				56B6883A1859649C006FB2E5 /* TPWeiboActivity.m in Sources */,
 				F4DF6ED517E5B6C9002D41B2 /* TPSinaWeiboRequestFactory.m in Sources */,
 				F4DF6ED617E5B6C9002D41B2 /* TPSinaWeiboUpdateStatusRequest.m in Sources */,
 				F4DF6ED717E5B6C9002D41B2 /* TPSinaWeiboUploadStatusRequest.m in Sources */,
@@ -2406,11 +2443,12 @@
 				F474E78217EAC95A0082DF31 /* TPTimelineHeaderView.m in Sources */,
 				F474E78917EB0A780082DF31 /* TPCommentViewController.m in Sources */,
 				562C046117F948AE00F428A9 /* MKAnnotationView+WebCache.m in Sources */,
+				56B6884218599004006FB2E5 /* TPWeixinShareManager.m in Sources */,
 				F474E78C17EB0FDC0082DF31 /* TPCommentDataModel.m in Sources */,
 				562C047D17F957FD00F428A9 /* TQRichTextBaseRun.m in Sources */,
 				F474E78F17EB13C20082DF31 /* TPCommentTableViewCell.m in Sources */,
 				F4CF5EE017EC00DF00DB0705 /* TPTimelineCommentTableViewCell.m in Sources */,
-				562CB53818191C1D00729476 /* TPNewFeatherViewController.m in Sources */,
+				562CB53818191C1D00729476 /* TPNewFeatureViewController.m in Sources */,
 				F4CF5EF817EC60FB00DB0705 /* TPDiaryTableViewCell.m in Sources */,
 				565A7F3117EE8C590049411D /* TPUtil.m in Sources */,
 				F481E63317F6A7950008AB8E /* TPFriendsViewController.m in Sources */,
@@ -2506,6 +2544,10 @@
 				HEADER_SEARCH_PATHS = "${SDK_DIR}/usr/include/libxml2";
 				INFOPLIST_FILE = "TimePill/TimePill-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/yansimon/Documents/TimePill/ThirdParty/WXSDK,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -2522,6 +2564,10 @@
 				HEADER_SEARCH_PATHS = "${SDK_DIR}/usr/include/libxml2";
 				INFOPLIST_FILE = "TimePill/TimePill-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/yansimon/Documents/TimePill/ThirdParty/WXSDK,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

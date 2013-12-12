@@ -218,7 +218,13 @@ static TPLongWeiboManager *instance = nil;
     CGRect windowRect = [UIScreen mainScreen].bounds;
     
     float newWidth = origineImage.size.width / kTPResizeRate;
-    float newHeight  = (windowRect.size.height - 150) * 0.65;
+    float diff = 0.0;
+    if (!IS_IPHONE_5) {
+        diff = 60.0;
+    } else {
+        diff = 80.0;
+    }
+    float newHeight  = (windowRect.size.height - diff) * 0.65;
     
     
     

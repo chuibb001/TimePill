@@ -81,6 +81,11 @@
     self.timeLabel.frame = timeLabelFrame;
     self.addButton.frame = addButtonFrame;
     self.iconImageView.frame = iconImageViewFrame;
+    
+    // for theme
+    UIEdgeInsets insets = UIEdgeInsetsMake(50, 50, 50, 100);
+    UIImage *image = [[TPTheme currentBubbleImage] resizableImageWithCapInsets:insets];
+    self.cardImageView.image = image;
 }
 
 #pragma mark private
@@ -108,6 +113,9 @@
 }
 -(void)beginAddViewAnimation:(BOOL)isOpen
 {
+    addViewOpenRect = CGRectMake(self.addButton.frame.origin.x - 40, self.addButton.frame.origin.y - 55, 70, 55.0);
+    addViewCloseRect = CGRectMake(self.addButton.frame.origin.x - 40, self.addButton.frame.origin.y - 35, 70, 55.0);
+    
     if(isOpen)
     {
         if(!self.addBackgroundImageView)  // 首次初始化
