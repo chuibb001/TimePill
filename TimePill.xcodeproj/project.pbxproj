@@ -2045,11 +2045,6 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = simon;
-				TargetAttributes = {
-					F4DF6B8D17E5B38C002D41B2 = {
-						DevelopmentTeam = 5764ABB67W;
-					};
-				};
 			};
 			buildConfigurationList = F4DF6B8917E5B38C002D41B2 /* Build configuration list for PBXProject "TimePill" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2486,8 +2481,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Apple Team (UTRG3JBVUC)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Apple Team (UTRG3JBVUC)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ZHANG XIN NAN (8L66SG2ZVA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ZHANG XIN NAN (8L66SG2ZVA)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2519,8 +2514,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Apple Team (UTRG3JBVUC)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Apple Team (UTRG3JBVUC)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ZHANG XIN NAN (8L66SG2ZVA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ZHANG XIN NAN (8L66SG2ZVA)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2537,7 +2532,7 @@
 		F4DF6BB517E5B38D002D41B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ZHANG XIN NAN (8L66SG2ZVA)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimePill/TimePill-Prefix.pch";
@@ -2557,7 +2552,8 @@
 		F4DF6BB617E5B38D002D41B2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ZHANG XIN NAN (8L66SG2ZVA)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: ZHANG XIN NAN (8L66SG2ZVA)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimePill/TimePill-Prefix.pch";
