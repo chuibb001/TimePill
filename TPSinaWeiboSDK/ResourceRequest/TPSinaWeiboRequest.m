@@ -24,16 +24,9 @@
 }
 
 -(TPWeiboRequestID)request
-{    
-    
-    NSString *fullURL = [kSinaWeiboSDKAPIDomain stringByAppendingString:self.urlPostfix];
-    
-    if([self.httpMethod isEqualToString:@"GET"]) // GET的参数跟在URL后面
-        fullURL = [TPSinaWeiboCommonFuction serializeURL:fullURL
-                                                           params:[self params] httpMethod:self.httpMethod];
-    
+{
     // 请求数据
-    TPWeiboRequestID weiboID = [[TPNetworkManager sharedInstance] requestWithURL:fullURL httpMethod:self.httpMethod params:[self params] completionHandler:^(NSData *responseData,int httpStatusCode)
+    TPWeiboRequestID weiboID = [[TPNetworkManager sharedInstance] requestWithPostFix:self.urlPostfix httpMethod:self.httpMethod params:[self params] completionHandler:^(NSData *responseData,int httpStatusCode)
      {
          if(!self.isRequestCanceled)  // 如果取消了就不发通知了
          {
@@ -42,15 +35,11 @@
              
              if(httpStatusCode == 200)
              {
-                 
-                 decodedResponseData = [self decodeResponseJsonObject:responseData]; // 解析JSON
- 
-                 //NSLog(@"解析JSON后:%@",decodedResponseData);
-             }
+                 decodedResponseData = responseData;
+              }
              else
              {
                  decodedResponseData = [[NSDictionary alloc] init]; // 先搞个空的吧，避免insert nil
-                 //NSLog(@"请求资源失败 %d",httpStatusCode);
              }
              
              [self postNotificationWithError:error ResponseData:decodedResponseData];

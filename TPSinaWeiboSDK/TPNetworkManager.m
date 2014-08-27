@@ -7,19 +7,35 @@
 //
 
 #import "TPNetworkManager.h"
+#import "AFHTTPRequestOperationManager.h"
+
+@interface TPNetworkManager ()
+
+@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+
+@end
 
 @implementation TPNetworkManager
 
 static TPNetworkManager * networkManager = nil;
-
 static TPWeiboRequestID requestID = 0;
+static NSString *baseURL = @"https://open.weibo.cn/2/";
 
 +(id)sharedInstance
 {
     if (!networkManager) {
-        networkManager = [[TPNetworkManager alloc] init];
+        networkManager = [[TPNetworkManager alloc] initWithBaseURL:baseURL];
     }
     return networkManager;
+}
+
+- (id)initWithBaseURL:(NSString *)baseUrl
+{
+    self = [self init];
+    if (self) {
+        self.manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:baseUrl]];
+    }
+    return self;
 }
 
 - (id)init
@@ -83,6 +99,93 @@ static TPWeiboRequestID requestID = 0;
     // 发起异步请求
     [request startAsynchronous];
 
+    return requestID ++;
+}
+
+- (TPWeiboRequestID)requestWithPostFix:(NSString *)postfix httpMethod:(NSString *)httpMethod params:(NSMutableDictionary *)params completionHandler:(TPNetworkManagerHandler)handler
+{
+    BOOL isUploadImage = NO;
+    NSString *imageKey = nil;
+    NSData *imageData = nil;
+    for (NSString *key in [params allKeys]) // 碰到UIImage,转成NSData
+    {
+        if([[params objectForKey:key] isKindOfClass:[UIImage class]])
+        {
+            UIImage *image = [params objectForKey:key];
+            imageData = UIImageJPEGRepresentation(image, 0.6);
+            [params removeObjectForKey:key];
+            isUploadImage = YES;
+            imageKey = key;
+        }
+    }
+    
+    AFHTTPRequestOperation *op = nil;
+    if ([httpMethod isEqualToString:@"POST"]) {
+        if (isUploadImage) {
+            op = [self.manager POST:postfix parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+                  {
+                      //
+                      //[formData appendPartWithFormData:imageData name:imageKey];
+                      [formData appendPartWithFileData:imageData name:imageKey fileName:imageKey mimeType:@"image/jpeg"];
+                  }success:^(AFHTTPRequestOperation * operation,id responseObject)
+                  {
+                      int statusCode = operation.response.statusCode;
+                      handler(responseObject,statusCode);
+                      // remove from cache
+                      NSString *requestID = [operation.userInfo valueForKey:@"requestID"];
+                      [self.requestDic removeObjectForKey:requestID];
+                  } failure:^(AFHTTPRequestOperation * operation, NSError *error)
+                  {
+                      int statusCode = operation.response.statusCode;
+                      handler(nil,statusCode);
+                      // remove from cache
+                      NSString *requestID = [operation.userInfo valueForKey:@"requestID"];
+                      [self.requestDic removeObjectForKey:requestID];
+                  }];
+        } else {
+            op = [self.manager POST:postfix parameters:params success:^(AFHTTPRequestOperation * operation,id responseObject)
+                  {
+                      int statusCode = operation.response.statusCode;
+                      handler(responseObject,statusCode);
+                      // remove from cache
+                      NSString *requestID = [operation.userInfo valueForKey:@"requestID"];
+                      [self.requestDic removeObjectForKey:requestID];
+                  }
+                            failure:^(AFHTTPRequestOperation * operation, NSError *error)
+                  {
+                      int statusCode = operation.response.statusCode;
+                      handler(nil,statusCode);
+                      // remove from cache
+                      NSString *requestID = [operation.userInfo valueForKey:@"requestID"];
+                      [self.requestDic removeObjectForKey:requestID];
+                  }];
+        }
+    }
+    else if ([httpMethod isEqualToString:@"GET"])
+    {
+        op = [self.manager GET:postfix parameters:params success:^(AFHTTPRequestOperation * operation,id responseObject)
+        {
+            int statusCode = operation.response.statusCode;
+            handler(responseObject,statusCode);
+            // remove from cache
+            NSString *requestID = [operation.userInfo valueForKey:@"requestID"];
+            [self.requestDic removeObjectForKey:requestID];
+        }
+        failure:^(AFHTTPRequestOperation * operation, NSError *error)
+        {
+            int statusCode = operation.response.statusCode;
+            handler(nil,statusCode);
+            // remove from cache
+            NSString *requestID = [operation.userInfo valueForKey:@"requestID"];
+            [self.requestDic removeObjectForKey:requestID];
+        }];
+    }
+    
+    op.userInfo = [[NSMutableDictionary alloc] init];
+    [op.userInfo setValue:[NSString stringWithFormat:@"requestID_%d",requestID] forKey:@"requestID"];
+    
+    [self.requestDic setObject:op forKey:[NSString stringWithFormat:@"requestID_%d",requestID]];
+    
     return requestID ++;
 }
 

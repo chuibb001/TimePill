@@ -18,10 +18,10 @@ typedef int TPWeiboRequestID ;  // 标识一个ASIRequest & WeiboRequest
 
 @property (nonatomic,strong) NSMutableDictionary *requestDic;
 
-+(id)sharedInstance;
-
--(TPWeiboRequestID)requestWithURL:(NSString *)urlString httpMethod:(NSString *)httpMethod params:(NSDictionary *)params completionHandler:(TPNetworkManagerHandler)handler;
-
--(void)cancelRequestWithID:(TPWeiboRequestID)requestID;
++ (id)sharedInstance;
+- (id)initWithBaseURL:(NSString *)baseUrl;
+- (TPWeiboRequestID)requestWithURL:(NSString *)urlString httpMethod:(NSString *)httpMethod params:(NSDictionary *)params completionHandler:(TPNetworkManagerHandler)handler;
+- (TPWeiboRequestID)requestWithPostFix:(NSString *)postfix httpMethod:(NSString *)httpMethod params:(NSMutableDictionary *)params completionHandler:(TPNetworkManagerHandler)handler;
+- (void)cancelRequestWithID:(TPWeiboRequestID)requestID;
 
 @end
